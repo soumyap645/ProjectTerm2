@@ -1,0 +1,53 @@
+Create Database EmployeeProject4
+use EmployeeProject4
+drop table employee
+create table employee
+(
+empid int constraint pk_emp primary key,
+name varchar(20) NOT NULL,
+dateofbirth varchar(50),
+emailid varchar (50) NOT NULL,
+gender varchar (50) constraint gender_type CHECK(gender IN ('Male','Female')),
+contact_no varchar(40),
+qualification varchar(50) constraint ck_type CHECK (qualification IN ('BE','Mtech','BCA','MCA')),
+address varchar(50),
+department varchar(50),
+authentication varchar (15),
+);
+sp_help 'employee'
+select * FROM employee;
+insert into employee values (11,'soumya','05-04-1996','soumya123@gmail.com','Female','278597976','BE','address1','dept1','Approved')
+insert into employee values (12,'vidya','23-07-1996','vidya123@gmail.com','Female','37686452','BE','address2','dept2','Approved')
+insert into employee values (13,'tharini','12-12-1996','tharini123@gmail.com','Female','936643653','MCA','address3','dept3','Not Approved')
+insert into employee values (14,'thiru','11-09-1996','thiru123@gmail.com','Male','157645776','BCA','address4','dept4','Approved')
+drop table Skill2
+Create table Skill2
+(
+Skillid int constraint sk_id primary key,
+empid int constraint k_skill Foreign KEY references employee(empid),
+skillname varchar (20) NOT NULL,
+certification varchar (50) NOT NULL,
+experience int,
+);
+INSERT INTO Skill2 Values (1,11,'Java,c,c++','certification1', 1);
+INSERT INTO Skill2 Values (2,12,'sql','certification2',2);
+INSERT INTO Skill2 Values (3,13,'marketing','certification3', 4);
+INSERT INTO Skill2 Values (4,14,'java,angular,c++','certification4', 3);
+
+drop table EmpAddress
+Create table EmpAddress
+(
+HomeNO varchar(20) constraint hk_No primary key,
+empid int constraint ek_skill Foreign KEY references employee(empid),
+City varchar (20),
+address varchar (50),
+);
+INSERT INTO EmpAddress Values ('8-9-654',11,'bengaluru','address1');
+INSERT INTO EmpAddress Values ('3-36-7',12,'delhi','address2');
+INSERT INTO EmpAddress Values ('34',13,'mumbai','address3');
+INSERT INTO EmpAddress Values ('845',14,'bengaluru','address4');
+
+
+SELECT *FROM Skill2;
+SELECT* FROM employee;
+SELECT * FROM EmpAddress;
